@@ -1,0 +1,41 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: reizist/alpine-hugo
+
+    working_directory: ~/hugo
+    steps:
+      - checkout
+      - add_ssh_keys
+      - run:
+          name: git config
+          command: |
+              git config --global user.name "reizist"
+              git config --global user.email "reizist@gmail.com"
+      - run:
+          name: git sync
+          command: |
+              git submodule init
+              git submodule update
+
+              git clone -b master git@github.com:reizist/reizist.com.git public
+              rm -rf public/*
+      - run:
+          name: build and push
+          command: |
+              hugo
+              cp -prv .circleci public
+              cd public
+              git add --all
+              git commit -m "[ci skip] publish"
+              git push -f origin master
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - develop
