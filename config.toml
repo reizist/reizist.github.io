@@ -3,6 +3,12 @@ languageCode = "en-us"
 title = "reizist's portfolio"
 theme = "sam"
 
+[params]
+  description  = "reizist's portfolio"
+  primaryImage = "img/profile.jpg"
+  topImage     = "img/profile.jpg"
+
+
 [[params.mainMenu]]
     link = "https://blog.reizist.com"
     text = "blog[jp]"
