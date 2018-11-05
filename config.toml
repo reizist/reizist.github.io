@@ -1,3 +1,9 @@
 baseURL = "https://reizist.com"
 languageCode = "en-us"
 title = "reizist's portfolio"
+theme = "sam"
+
+[[params.mainMenu]]
+    link = "https://blog.reizist.com"
+    text = "blog[jp]"
+
